@@ -1,12 +1,52 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.christian.care2reuse.Information">
+    android:layout_height="match_parent" android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    tools:context="com.pcds.care2reuse.Infopage">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+   //Borders
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/title_activity_information"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:id="@+id/topBox"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#ff0a7062" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="#ff0a7062"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/topBox"
+        android:layout_alignStart="@+id/topBox"
+        android:layout_alignRight="@+id/topBox"
+        android:layout_alignEnd="@+id/topBox"
+        android:id="@+id/bottomBox" />
+
+    <TextView
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="@string/InnoAidinfo"
+        android:id="@+id/InnoAid"
+        android:layout_below="@+id/topBox"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 </RelativeLayout>

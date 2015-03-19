@@ -2,8 +2,10 @@ package com.example.christian.care2reuse;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class Information extends ActionBarActivity {
