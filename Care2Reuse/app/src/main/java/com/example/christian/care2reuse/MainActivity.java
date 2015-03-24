@@ -8,7 +8,6 @@ import android.view.View;
 //import android.app.Activity;
 import android.content.Intent;
 
-
 public class MainActivity extends ActionBarActivity {
 
     @Override
