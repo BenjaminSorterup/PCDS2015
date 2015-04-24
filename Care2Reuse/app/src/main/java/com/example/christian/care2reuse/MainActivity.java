@@ -4,10 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,20 +24,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.app.Activity;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ListActivity {
 
-    EditText etResponse;
+    private static String url = "https://dev.care2reuse.org/posts/?format=json";
 
+    private static String TAG = "TAG";
+
+    private static final String TAG_ID = "id";
+    private static final String TAG_CON = "content";
+
+    ArrayList<HashMap<String,String>> postList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etResponse = (EditText) findViewById(R.id.editText);
+        postList = new ArrayList<HashMap<String, String>>();
 
-        new HttpAsyncTask().execute("https://dev.care2reuse.org/posts/?format=json");
+        ListView lv = getListView();
 
+        new HttpAsyncTask().execute();
     }
 
     @Override
@@ -79,56 +96,47 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    private static String convertInputStreamToString(InputStream inputStream) throws IOException{
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
-        String line = "";
-        String result = "";
-        while((line = bufferedReader.readLine()) != null)
-            result += line;
-
-        inputStream.close();
-        return result;
-
-    }
-
-    public static String GET(String url){
-        InputStream inputStream = null;
-        String result = "";
-        try {
-
-            // create HttpClient
-            HttpClient httpclient = new DefaultHttpClient();
-
-            // make GET request to the given URL
-            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
-
-            // receive response as inputStream
-            inputStream = httpResponse.getEntity().getContent();
-
-            // convert inputstream to string
-            if(inputStream != null)
-                result = convertInputStreamToString(inputStream);
-            else
-                result = "Did not work!";
-
-        } catch (Exception e) {
-            Log.d("InputStream", e.getLocalizedMessage());
-        }
-
-        return result;
-    }
-
-    private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+    private class HttpAsyncTask extends AsyncTask<Void,Void,Void> {
         @Override
-        protected String doInBackground(String... urls) {
+        protected Void doInBackground(Void... args) {
+            JSONParser jsonParser = new JSONParser();
+            String jsonStr = jsonParser.request(url);
 
-            return GET(urls[0]);
+            Log.d("Response: ", "> " + jsonStr);
+
+            if (jsonStr != null) {
+                try {
+                    Log.d(TAG,"We good");
+                    JSONArray jArr = new JSONArray(jsonStr);
+                    Log.d(TAG,"We still good");
+
+                    for (int i = 0; i < jArr.length(); i++) {
+                        JSONObject jObj = jArr.getJSONObject(i);
+                        String id = ""+jObj.getInt(TAG_ID);
+                        String content = jObj.getString(TAG_CON);
+
+                        HashMap<String,String> post = new HashMap<>();
+                        post.put(TAG_ID,id);
+                        post.put(TAG_CON,content);
+
+                        postList.add(post);
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } return null;
         }
-        // onPostExecute displays the results of the AsyncTask.
+
         @Override
-        protected void onPostExecute(String result) {
-            etResponse.setText(result);
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            ListAdapter adapter = new SimpleAdapter(
+                    MainActivity.this,postList,
+                    R.layout.list_v, new String[]{TAG_ID,TAG_CON},
+                    new int[]{R.id.id,R.id.content});
+            setListAdapter(adapter);
         }
     }
-
 }
