@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +20,6 @@ import com.facebook.appevents.AppEventsLogger;
 public class MainActivity extends FragmentActivity {
 
     //private static final String USER_SKIPPED_LOGIN_KEY = "user_skipped_login";
-
     private static final int LOGIN = 0;
     //private static final int SELECTION = 1;
     //private static final int SETTINGS = 2;
@@ -54,13 +54,18 @@ public class MainActivity extends FragmentActivity {
                     }
 
                     if (currentAccessToken != null) {
+                        FragmentManager fm = getSupportFragmentManager();
+                        FragmentTransaction transaction = fm.beginTransaction();
+
+                        transaction.hide(fragments[LOGIN]);
+                        transaction.commit();
                         //Intent intent = new Intent(loginactivity.this,MainActivity.class);
                         //startActivity(intent);
                     } else {
                         FragmentManager fm = getSupportFragmentManager();
                         FragmentTransaction transaction = fm.beginTransaction();
 
-                        transaction.show(fragments[0]);
+                        transaction.show(fragments[LOGIN]);
                         transaction.commit();
                     }
                 }
@@ -77,9 +82,7 @@ public class MainActivity extends FragmentActivity {
         //fragments[SETTINGS] = fm.findFragmentById(R.id.userSettingsFragment);
 
         FragmentTransaction transaction = fm.beginTransaction();
-        for(int i = 0; i < fragments.length; i++) {
-            transaction.hide(fragments[i]);
-        }
+        transaction.hide(fragments[0]);
         transaction.commit();
         /*
         loginFragment.setSkipLoginCallback(new loginFragment.SkipLoginCallback() {
