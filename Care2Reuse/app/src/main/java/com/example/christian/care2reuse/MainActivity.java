@@ -22,11 +22,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.app.Activity;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 public class MainActivity extends ListActivity {
 
@@ -46,6 +48,17 @@ public class MainActivity extends ListActivity {
         postList = new ArrayList<HashMap<String, String>>();
 
         ListView lv = getListView();
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                String content = ((TextView) view.findViewById(R.id.content))
+                        .getText().toString();
+                Intent in = new Intent(MainActivity.this,SinglePostActivity.class);
+                in.putExtra(TAG_CON,content);
+                startActivity(in);
+            }
+        });
 
         new HttpAsyncTask().execute();
     }
@@ -102,13 +115,9 @@ public class MainActivity extends ListActivity {
             JSONParser jsonParser = new JSONParser();
             String jsonStr = jsonParser.request(url);
 
-            Log.d("Response: ", "> " + jsonStr);
-
             if (jsonStr != null) {
                 try {
-                    Log.d(TAG,"We good");
                     JSONArray jArr = new JSONArray(jsonStr);
-                    Log.d(TAG,"We still good");
 
                     for (int i = 0; i < jArr.length(); i++) {
                         JSONObject jObj = jArr.getJSONObject(i);

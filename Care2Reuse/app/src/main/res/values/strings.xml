@@ -10,4 +10,5 @@
     <string name="facebook_app_id">687199041401045</string>
     <string name="title_activity_loginactivity">loginactivity</string>
     <string name="title_facebook_login">com.facebook.LoginActivity</string>
+    <string name="title_activity_single_post">SinglePostActivity</string>
 </resources>
