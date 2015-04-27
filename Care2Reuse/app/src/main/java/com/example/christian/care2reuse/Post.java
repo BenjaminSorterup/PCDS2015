@@ -41,18 +41,16 @@ public class Post extends ActionBarActivity {
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                       if(item.getItemId() == 2131296373){
-                           dispatchTakePictureIntent();
+                        // Toast.makeText(Post.this, item.getItemId(), Toast.LENGTH_SHORT).show();
 
-                       }
-                        if (item.getItemId() == 2131296372){
-                            Intent intent = new Intent();
-                            intent.setType("image/*");
-                            intent.setAction(Intent.ACTION_GET_CONTENT);
-                            startActivityForResult(Intent.createChooser(intent,
-                                    "Select Picture"), SELECT_PICTURE);
+                        if(item.getTitle().equals("Take picture")){
+                            dispatchTakePictureIntent();
 
                         }
+                        if (item.getTitle().equals("Upload picture from Library")){
+                            callfunc();
+                        }
+
                         return true;
                     }
                 });
@@ -90,6 +88,14 @@ public class Post extends ActionBarActivity {
 
     }
 
+    public void callfunc(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,
+                "Select Picture"), SELECT_PICTURE);
+
+    }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         String filemanagerstring;
         String selectedImagePath;
