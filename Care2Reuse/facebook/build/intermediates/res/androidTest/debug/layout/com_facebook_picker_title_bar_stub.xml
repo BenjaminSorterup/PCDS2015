@@ -23,4 +23,8 @@
               android:layout_width="match_parent"/>
 
 </merge>
+<<<<<<< HEAD
 <!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/facebook/res/layout/com_facebook_picker_title_bar_stub.xml --><!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/facebook/build/intermediates/bundles/debug/res/layout/com_facebook_picker_title_bar_stub.xml -->
+=======
+<!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/facebook/res/layout/com_facebook_picker_title_bar_stub.xml --><!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/facebook/build/intermediates/bundles/debug/res/layout/com_facebook_picker_title_bar_stub.xml -->
+>>>>>>> origin/camera-and-media-library
