@@ -1,165 +1,59 @@
 package com.example.christian.care2reuse;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.app.ListActivity;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-//import android.app.Activity;
-import android.content.Intent;
-import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.app.Activity;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ListActivity {
 
-    //private static final String USER_SKIPPED_LOGIN_KEY = "user_skipped_login";
-    private static final int LOGIN = 0;
-    //private static final int SELECTION = 1;
-    //private static final int SETTINGS = 2;
-    private static final int FRAGMENT_COUNT = LOGIN +1;
+    private static String url = "https://dev.care2reuse.org/posts/?format=json";
 
-    private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
-    private boolean isResumed = false;
-    //private boolean userSkippedLogin = false;
-    private AccessTokenTracker accessTokenTracker;
-    private CallbackManager callbackManager;
+    private static String TAG = "TAG";
 
+    private static final String TAG_ID = "id";
+    private static final String TAG_CON = "content";
+
+    ArrayList<HashMap<String,String>> postList;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
-        /*
-        if (savedInstanceState != null) {
-            userSkippedLogin = savedInstanceState.getBoolean(USER_SKIPPED_LOGIN_KEY);
-        }
-        */
-        callbackManager = CallbackManager.Factory.create();
-
-        accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken,
-                                                       AccessToken currentAccessToken) {
-                if (isResumed) {
-                    FragmentManager manager = getSupportFragmentManager();
-                    int backStackSize = manager.getBackStackEntryCount();
-                    for (int i = 0; i < backStackSize; i++) {
-                        manager.popBackStack();
-                    }
-
-                    if (currentAccessToken != null) {
-                        FragmentManager fm = getSupportFragmentManager();
-                        FragmentTransaction transaction = fm.beginTransaction();
-
-                        transaction.hide(fragments[LOGIN]);
-                        transaction.commit();
-                        //Intent intent = new Intent(loginactivity.this,MainActivity.class);
-                        //startActivity(intent);
-                    } else {
-                        FragmentManager fm = getSupportFragmentManager();
-                        FragmentTransaction transaction = fm.beginTransaction();
-
-                        transaction.show(fragments[LOGIN]);
-                        transaction.commit();
-                    }
-                }
-            }
-        };
-
-
         setContentView(R.layout.activity_main);
 
-        FragmentManager fm = getSupportFragmentManager();
-        loginFragment loginFragment = (loginFragment) fm.findFragmentById(R.id.loginFragment);
-        fragments[LOGIN] = loginFragment;
-        //fragments[SELECTION] = fm.findFragmentById(R.id.selectionFragment);
-        //fragments[SETTINGS] = fm.findFragmentById(R.id.userSettingsFragment);
+        postList = new ArrayList<HashMap<String, String>>();
 
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.hide(fragments[0]);
-        transaction.commit();
-        /*
-        loginFragment.setSkipLoginCallback(new loginFragment.SkipLoginCallback() {
+        ListView lv = getListView();
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onSkipLoginPressed() {
-                userSkippedLogin = true;
-                //showFragment(SELECTION, false);
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                String content = ((TextView) view.findViewById(R.id.content))
+                        .getText().toString();
+                Intent in = new Intent(MainActivity.this,SinglePostActivity.class);
+                in.putExtra(TAG_CON,content);
+                startActivity(in);
             }
         });
-        */
+
+        new HttpAsyncTask().execute();
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        isResumed = true;
-
-        // Call the 'activateApp' method to log an app event for use in analytics and advertising
-        // reporting.  Do so in the onResume methods of the primary Activities that an app may be
-        // launched into.
-        AppEventsLogger.activateApp(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        isResumed = false;
-
-        // Call the 'deactivateApp' method to log an app event for use in analytics and advertising
-        // reporting.  Do so in the onPause methods of the primary Activities that an app may be
-        // launched into.
-        AppEventsLogger.deactivateApp(this);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        accessTokenTracker.stopTracking();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        //outState.putBoolean(USER_SKIPPED_LOGIN_KEY, userSkippedLogin);
-    }
-
-    @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
-
-        if (AccessToken.getCurrentAccessToken() != null) {
-            // if the user already logged in, try to show the selection fragment
-            //setContentView(R.layout.activity_main);
-            //userSkippedLogin = false;
-        } /*else if (userSkippedLogin) {
-            Intent intent = new Intent(loginactivity.this,MainActivity.class);
-            startActivity(intent);
-        } */
-        else {
-            // otherwise present the splash screen and ask the user to login,
-            // unless the user explicitly skipped.
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction transaction = fm.beginTransaction();
-
-            transaction.show(fragments[0]);
-            transaction.commit();
-        }
-    }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -207,4 +101,43 @@ public class MainActivity extends FragmentActivity {
         startActivity(intent);
     }
 
+    private class HttpAsyncTask extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... args) {
+            JSONParser jsonParser = new JSONParser();
+            String jsonStr = jsonParser.request(url);
+
+            if (jsonStr != null) {
+                try {
+                    JSONArray jArr = new JSONArray(jsonStr);
+
+                    for (int i = 0; i < jArr.length(); i++) {
+                        JSONObject jObj = jArr.getJSONObject(i);
+                        String id = ""+jObj.getInt(TAG_ID);
+                        String content = jObj.getString(TAG_CON);
+
+                        HashMap<String,String> post = new HashMap<String,String>();
+                        post.put(TAG_ID,id);
+                        post.put(TAG_CON,content);
+
+                        postList.add(post);
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            ListAdapter adapter = new SimpleAdapter(
+                    MainActivity.this,postList,
+                    R.layout.list_v, new String[]{TAG_ID,TAG_CON},
+                    new int[]{R.id.id,R.id.content});
+            setListAdapter(adapter);
+        }
+    }
 }

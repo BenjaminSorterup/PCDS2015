@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    android:background="#FFFFFF"
+    tools:context="com.example.christian.care2reuse.SinglePostActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:id="@+id/topBox"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#ff0a7062" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="#ff0a7062"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/topBox"
+        android:layout_alignStart="@+id/topBox"
+        android:layout_alignRight="@+id/topBox"
+        android:layout_alignEnd="@+id/topBox"
+        android:id="@+id/bottomBox" />
+
+
+    <TextView
+        android:id="@+id/single_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="THIS IS A PLACEHOLDER"
+        android:textColor="#000000"
+        android:layout_marginTop="133dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="41dp"
+        android:layout_below="@+id/topBox"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="15dp" />
+
+</RelativeLayout>

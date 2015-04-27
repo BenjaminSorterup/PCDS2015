@@ -1,23 +1,25 @@
 package com.example.christian.care2reuse;
 
-
-
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+//import android.app.Activity;
+import android.content.Intent;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.CallbackManager;
-
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 public class loginactivity extends FragmentActivity {
 
     //private static final String USER_SKIPPED_LOGIN_KEY = "user_skipped_login";
-
     private static final int LOGIN = 0;
     //private static final int SELECTION = 1;
     //private static final int SETTINGS = 2;
@@ -25,13 +27,14 @@ public class loginactivity extends FragmentActivity {
 
     private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
     private boolean isResumed = false;
-    private boolean userSkippedLogin = false;
+    //private boolean userSkippedLogin = false;
     private AccessTokenTracker accessTokenTracker;
     private CallbackManager callbackManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         /*
         if (savedInstanceState != null) {
             userSkippedLogin = savedInstanceState.getBoolean(USER_SKIPPED_LOGIN_KEY);
@@ -51,13 +54,18 @@ public class loginactivity extends FragmentActivity {
                     }
 
                     if (currentAccessToken != null) {
-                        Intent intent = new Intent(loginactivity.this,MainActivity.class);
-                        startActivity(intent);
+                        FragmentManager fm = getSupportFragmentManager();
+                        FragmentTransaction transaction = fm.beginTransaction();
+
+                        transaction.hide(fragments[LOGIN]);
+                        transaction.commit();
+                        //Intent intent = new Intent(loginactivity.this,MainActivity.class);
+                        //startActivity(intent);
                     } else {
                         FragmentManager fm = getSupportFragmentManager();
                         FragmentTransaction transaction = fm.beginTransaction();
 
-                        transaction.show(fragments[0]);
+                        transaction.show(fragments[LOGIN]);
                         transaction.commit();
                     }
                 }
@@ -74,9 +82,7 @@ public class loginactivity extends FragmentActivity {
         //fragments[SETTINGS] = fm.findFragmentById(R.id.userSettingsFragment);
 
         FragmentTransaction transaction = fm.beginTransaction();
-        for(int i = 0; i < fragments.length; i++) {
-            transaction.hide(fragments[i]);
-        }
+        transaction.hide(fragments[0]);
         transaction.commit();
         /*
         loginFragment.setSkipLoginCallback(new loginFragment.SkipLoginCallback() {
@@ -87,6 +93,7 @@ public class loginactivity extends FragmentActivity {
             }
         });
         */
+
     }
 
     @Override
@@ -135,9 +142,10 @@ public class loginactivity extends FragmentActivity {
         super.onResumeFragments();
 
         if (AccessToken.getCurrentAccessToken() != null) {
-            // if the user already logged in, try to show the selection fragment
             Intent intent = new Intent(loginactivity.this,MainActivity.class);
             startActivity(intent);
+            // if the user already logged in, try to show the selection fragment
+            //setContentView(R.layout.activity_main);
             //userSkippedLogin = false;
         } /*else if (userSkippedLogin) {
             Intent intent = new Intent(loginactivity.this,MainActivity.class);
@@ -154,5 +162,28 @@ public class loginactivity extends FragmentActivity {
         }
     }
 
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }

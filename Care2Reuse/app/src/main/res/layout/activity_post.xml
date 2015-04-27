@@ -5,6 +5,7 @@
     android:paddingTop="0dp"
     android:paddingBottom="0dp"
     tools:context="com.pcds.care2reuse.Post"
+    android:background="#FFFFFF"
     android:gravity="center">
 
     <TextView
