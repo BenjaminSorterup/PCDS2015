@@ -1,1 +1,1 @@
-include ':app', ':samples:SwitchUserSample', ':tests', ':samples:Scrumptious', ':samples:RPSSample', ':facebook', ':junitTests', ':samples:HelloFacebookSample', ':samples:MessengerSendSample'
+include ':app', ':samples:SwitchUserSample', ':tests', ':samples:Scrumptious', ':samples:RPSSample', ':facebook', ':junitTests', ':samples:HelloFacebookSample', ':samples:MessengerSendSample', ':volley'

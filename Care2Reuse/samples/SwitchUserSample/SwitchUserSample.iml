@@ -16,6 +16,7 @@
         <option name="SOURCE_GEN_TASK_NAME" value="generateDebugSources" />
         <option name="TEST_SOURCE_GEN_TASK_NAME" value="generateDebugAndroidTestSources" />
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
@@ -83,8 +84,8 @@
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="bolts-android-1.1.4" level="project" />
     <orderEntry type="module" module-name="facebook" exported="" />
   </component>

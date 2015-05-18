@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/samples/Scrumptious" />
             <option value="$PROJECT_DIR$/samples/SwitchUserSample" />
             <option value="$PROJECT_DIR$/tests" />
+            <option value="$PROJECT_DIR$/volley" />
           </set>
         </option>
       </GradleProjectSettings>
