@@ -47,4 +47,14 @@
         android:layout_alignParentStart="true"
         android:textSize="15dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Created by X on date"
+        android:id="@+id/nameanddate"
+        android:layout_above="@+id/bottomBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="53dp"
+        android:textColor="#ff0a7062" />
+
 </RelativeLayout>
