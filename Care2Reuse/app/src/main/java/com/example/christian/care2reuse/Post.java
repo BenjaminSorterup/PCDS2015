@@ -40,10 +40,10 @@ import java.util.Map;
 
 import static com.android.volley.Response.*;
 
+/*
+*Post class represents the activity where the user is able to create posts
+ */
 public class Post extends ActionBarActivity {
-    /*
-    *Post class represents the activity where the user is able to create posts
-     */
     private static final int SELECT_PICTURE = 1;
     static final int CAMERA_REQUEST = 1888;
     String str_url = "https://dev.care2reuse.org/posts/?format=api";
@@ -111,10 +111,10 @@ public class Post extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+    *Takes the msg written in the textView and sends it to the server
+     */
     public void createMSG(View v) {
-        /*
-        *Takes the msg written in the textView and sends it to the server
-         */
         String msg;
         msg = et.getText().toString();
         JSONObject json = new JSONObject();
@@ -142,7 +142,7 @@ public class Post extends ActionBarActivity {
         }) {@Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", "");
+                params.put("Authorization", "Tokenc00369260eab0df08da7c37d96a758bb99dfe96d");
                 return params;
             }
         };
@@ -178,10 +178,11 @@ public class Post extends ActionBarActivity {
     queue.add(req);
     }
 
+ /*
+*Used to create the media library intent
+ */
     public void callfunc(){
-        /*
-        *Used to create the media library intent
-         */
+
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -189,6 +190,13 @@ public class Post extends ActionBarActivity {
                 "Select Picture"), SELECT_PICTURE);
 
     }
+
+    /**
+     * Saves the image when one of either the camera or media library intent is done.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         mImageView = (ImageView)findViewById(R.id.postimg);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
@@ -219,11 +227,10 @@ public class Post extends ActionBarActivity {
         }
 
     }
-
+    /**
+     *Gets the path of the file chosen in the media library
+     */
     public String getPath(Uri uri) {
-        /*
-        *Gets the path of the file chosen in the media library
-         */
         String[] projection = { MediaStore.Images.Media.DATA };
         Cursor cursor = managedQuery(uri, projection, null, null, null);
         if(cursor!=null)
