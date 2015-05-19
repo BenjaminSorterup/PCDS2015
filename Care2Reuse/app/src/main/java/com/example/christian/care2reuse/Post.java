@@ -1,10 +1,12 @@
 package com.example.christian.care2reuse;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
 import android.view.View;
@@ -16,14 +18,32 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.database.Cursor;
 import android.widget.Toast;
-public class Post extends ActionBarActivity {
-    private static final int SELECT_PICTURE = 1;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.android.volley.Response.*;
+
+public class Post extends ActionBarActivity {
+    /*
+    *Post class represents the activity where the user is able to create posts
+     */
+    private static final int SELECT_PICTURE = 1;
+    static final int CAMERA_REQUEST = 1888;
+    String str_url = "https://dev.care2reuse.org/posts/?format=api";
     TextView tv;
     EditText et;
 
     Button button1;
+    ImageView mImageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,14 +101,48 @@ public class Post extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void createMSG(View v){
+    public void createMSG(View v) {
+        /*
+        *Takes the msg written in the textView and sends it to the server
+         */
+        RequestQueue queue = Volley.newRequestQueue(this);
         String msg;
         msg = et.getText().toString();
-        tv.setText(msg, TextView.BufferType.EDITABLE);
+        StringRequest stringReq = new StringRequest(Request.Method.POST, str_url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        tv.setText("It's send", TextView.BufferType.EDITABLE);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                tv.setText("Error", TextView.BufferType.EDITABLE);
 
+            }
+        }) {@Override
+        protected Map<String, String> getParams () {
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("id", "i dont even know"); //skal have facebook login username
+            params.put("content", "pew?"); //pew
+            params.put("address", "empty for the moment"); //skal kunne få image bitmap
+            params.put("location", "pew");
+            return params;
+        }/*
+        @Override
+        public Map<String, String> getHeaders ()throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("Content", "applicatiob/x-ww-form-urlencoded");
+            return params;
+        }*/
+    };
+    queue.add(stringReq);
     }
 
     public void callfunc(){
+        /*
+        *Used to create the media library intent
+         */
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -97,6 +151,14 @@ public class Post extends ActionBarActivity {
 
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mImageView = (ImageView)findViewById(R.id.postimg);
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            mImageView.setImageBitmap(photo);
+        }
+        /*
+        *Saves the selected photo when accessing the media library intent.
+         */
         String filemanagerstring;
         String selectedImagePath;
         if (resultCode == RESULT_OK) {
@@ -114,14 +176,18 @@ public class Post extends ActionBarActivity {
                     System.out.println("filemanagerstring is the right one for you!");
             }
         }
+
     }
 
     public String getPath(Uri uri) {
+        /*
+        *Gets the path of the file chosen in the media library
+         */
         String[] projection = { MediaStore.Images.Media.DATA };
         Cursor cursor = managedQuery(uri, projection, null, null, null);
         if(cursor!=null)
         {
-            //Kan blive null hvis man anvender I/O til at vælge fil.
+            //This may be NULL if one is using I/O
             int column_index = cursor
                     .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
@@ -130,9 +196,12 @@ public class Post extends ActionBarActivity {
         else return null;
     }
     private void dispatchTakePictureIntent() {
+        /*
+        *access the camera intent
+         */
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            startActivityForResult(takePictureIntent, CAMERA_REQUEST);
         }
     }
 
