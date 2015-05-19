@@ -7,12 +7,20 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     android:paddingBottom="0dp"
-    tools:context="com.example.christian.care2reuse.loginactivity">
+    tools:context="com.example.christian.care2reuse.loginactivity"
+    android:background="#ff0a7062">
 
     <fragment
         android:name="com.example.christian.care2reuse.loginFragment"
         android:id="@+id/loginFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout="@layout/login"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="226dp" />
+
+
 
 </RelativeLayout>

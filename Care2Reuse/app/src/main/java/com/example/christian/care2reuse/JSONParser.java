@@ -28,10 +28,17 @@ import java.util.List;
 public class JSONParser {
     static String response = null;
 
+    // constructor
     public JSONParser() {
         // do nothing
     }
 
+
+    /**
+     * Requests information from the API.
+     * @param  url The hostname for the API.
+     * @return The JSON Array resulting from the request in string format.
+     */
     public String request(String url) {
         try {
             // connect

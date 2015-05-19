@@ -26,10 +26,14 @@ public class MainActivity extends ListActivity {
 
     private static String url = "https://dev.care2reuse.org/posts/?format=json";
 
-    private static String TAG = "TAG";
-
     private static final String TAG_ID = "id";
     private static final String TAG_CON = "content";
+    private static final String TAG_USER = "2"; //index at which user information is stored
+    private static final String TAG_FNAME = "first_name";
+    private static final String TAG_LNAME = "last_name";
+    private static final String TAG_DATE = "date_created";
+
+
 
     ArrayList<HashMap<String,String>> postList;
     @Override
@@ -106,19 +110,26 @@ public class MainActivity extends ListActivity {
         protected Void doInBackground(Void... args) {
             JSONParser jsonParser = new JSONParser();
             String jsonStr = jsonParser.request(url);
-
+            Log.e("TESTERINO","vi kører");
             if (jsonStr != null) {
                 try {
                     JSONArray jArr = new JSONArray(jsonStr);
 
                     for (int i = 0; i < jArr.length(); i++) {
                         JSONObject jObj = jArr.getJSONObject(i);
+                        Log.e("TESTERINO",""+jObj);
                         String id = ""+jObj.getInt(TAG_ID);
                         String content = jObj.getString(TAG_CON);
+                        String date = jObj.getString(TAG_DATE);
+                        //JSONObject user = jObj.getJSONObject(TAG_USER);
+                        Log.e("TESTERINO","hej mås");
+                        //Log.e("TESTERINO",""+user);
+                        Log.e("TESTERINO","hej igen mås");
 
                         HashMap<String,String> post = new HashMap<String,String>();
                         post.put(TAG_ID,id);
                         post.put(TAG_CON,content);
+                        post.put(TAG_DATE,date);
 
                         postList.add(post);
                     }
