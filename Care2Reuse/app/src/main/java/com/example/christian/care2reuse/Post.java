@@ -16,6 +16,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.database.Cursor;
 import android.widget.Toast;
+
+import org.json.JSONObject;
+
 public class Post extends ActionBarActivity {
     private static final int SELECT_PICTURE = 1;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -58,6 +61,8 @@ public class Post extends ActionBarActivity {
                 popup.show();
             }
         });
+
+
     }
 
 
@@ -81,13 +86,25 @@ public class Post extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void createMSG(View v){
-        String msg;
-        msg = et.getText().toString();
-        tv.setText(msg, TextView.BufferType.EDITABLE);
+    public void postToDashboard(View v) {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", 1);
+            JSONObject user = new JSONObject();
+            user.put("first_name", "John");
+            user.put("last_name", "Doe 1");
+            user.put("email", "user1@test.care2reuse.net");
+            user.put("facebook_uid", "D3213123121");
+            user.put("facebook_username", null);
+            jsonObject.put("user", user);
+            jsonObject.put("content", et.getText().toString());
+            jsonObject.put("address", "Halløjgade 10");
+            jsonObject.put("date_created", "2015-05-17T15:12:15.902211Z");
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
     public void callfunc(){
         Intent intent = new Intent();
         intent.setType("image/*");
