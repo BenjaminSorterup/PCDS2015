@@ -24,4 +24,8 @@
           android:duplicateParentState="true"/>
 
 
+<<<<<<< HEAD
 <!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/samples/MessengerSendSample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/layout/abc_list_menu_item_checkbox.xml -->
+=======
+<!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/samples/MessengerSendSample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/layout/abc_list_menu_item_checkbox.xml -->
+>>>>>>> ca160d62f19c93bf092b3259413f5c566719d776

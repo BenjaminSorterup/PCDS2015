@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/samples/RPSSample/build/intermediates/exploded-aar/com.facebook.android/facebook/4.0.0/res/values-pt/values.xml -->
+=======
+    <!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/samples/RPSSample/build/intermediates/exploded-aar/com.facebook.android/facebook/4.0.0/res/values-pt/values.xml -->
+>>>>>>> ca160d62f19c93bf092b3259413f5c566719d776
     <eat-comment/>
     <string name="messenger_send_button_text">Enviar</string>
 </resources>

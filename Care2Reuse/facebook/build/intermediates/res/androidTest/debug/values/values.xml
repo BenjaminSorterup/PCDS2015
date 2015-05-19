@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/facebook/build/intermediates/bundles/debug/res/values/values.xml -->
+=======
+    <!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/facebook/build/intermediates/bundles/debug/res/values/values.xml -->
+>>>>>>> ca160d62f19c93bf092b3259413f5c566719d776
     <eat-comment/>
     <color name="com_facebook_blue">#3B5998</color>
     <color name="com_facebook_button_background_color">#415dae</color>

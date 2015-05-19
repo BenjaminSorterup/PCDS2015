@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/samples/MessengerSendSample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values-v14/values.xml -->
+=======
+    <!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/samples/MessengerSendSample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values-v14/values.xml -->
+>>>>>>> ca160d62f19c93bf092b3259413f5c566719d776
     <eat-comment/>
     <style name="Base.Theme.AppCompat" parent="Base.V14.Theme.AppCompat">
         <item name="android:actionModeCutDrawable">?actionModeCutDrawable</item>

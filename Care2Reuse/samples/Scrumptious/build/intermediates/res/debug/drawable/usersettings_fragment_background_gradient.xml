@@ -25,4 +25,8 @@
       android:gradientRadius="495"
       android:type="radial"/>
 </shape>    
+<<<<<<< HEAD
 <!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/samples/Scrumptious/res/drawable/usersettings_fragment_background_gradient.xml -->
+=======
+<!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/samples/Scrumptious/res/drawable/usersettings_fragment_background_gradient.xml -->
+>>>>>>> ca160d62f19c93bf092b3259413f5c566719d776

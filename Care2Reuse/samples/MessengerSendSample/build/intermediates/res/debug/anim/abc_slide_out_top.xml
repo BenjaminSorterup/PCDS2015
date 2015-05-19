@@ -16,4 +16,8 @@
 <translate xmlns:android="http://schemas.android.com/apk/res/android"
            android:interpolator="@android:anim/accelerate_interpolator"
            android:fromYDelta="0" android:toYDelta="-50%p"
+<<<<<<< HEAD
            android:duration="@android:integer/config_mediumAnimTime"/><!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/samples/MessengerSendSample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_out_top.xml -->
+=======
+           android:duration="@android:integer/config_mediumAnimTime"/><!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/samples/MessengerSendSample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_out_top.xml -->
+>>>>>>> ca160d62f19c93bf092b3259413f5c566719d776

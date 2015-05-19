@@ -27,4 +27,8 @@
           android:title="@string/menu_item_clear_slot"
           app:showAsAction="always" />
 </menu>
+<<<<<<< HEAD
 <!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/samples/SwitchUserSample/res/menu/context_settings.xml -->
+=======
+<!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/samples/SwitchUserSample/res/menu/context_settings.xml -->
+>>>>>>> ca160d62f19c93bf092b3259413f5c566719d776
