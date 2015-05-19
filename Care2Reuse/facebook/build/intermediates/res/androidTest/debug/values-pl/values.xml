@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<<<<<<< HEAD
-    <!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/facebook/build/intermediates/bundles/debug/res/values-pl/values.xml -->
-=======
     <!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/facebook/build/intermediates/bundles/debug/res/values-pl/values.xml -->
->>>>>>> ca160d62f19c93bf092b3259413f5c566719d776
     <eat-comment/>
     <string name="messenger_send_button_text">Wyślij</string>
 </resources>

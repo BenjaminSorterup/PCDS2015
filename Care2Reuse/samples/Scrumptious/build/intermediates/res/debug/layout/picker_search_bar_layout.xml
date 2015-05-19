@@ -48,8 +48,4 @@
             android:drawablePadding="5dp"
             android:imeOptions="actionDone"
             />
-<<<<<<< HEAD
-</LinearLayout><!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/samples/Scrumptious/res/layout/picker_search_bar_layout.xml -->
-=======
 </LinearLayout><!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/samples/Scrumptious/res/layout/picker_search_bar_layout.xml -->
->>>>>>> ca160d62f19c93bf092b3259413f5c566719d776

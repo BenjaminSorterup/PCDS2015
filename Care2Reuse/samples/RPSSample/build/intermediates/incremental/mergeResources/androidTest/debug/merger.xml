@@ -1,6 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<merger version="3"><dataSet config="main"><source path="C:\Users\Yu\Desktop\PCDS2015\Care2Reuse\samples\RPSSample\src\androidTest\res"/><source path="C:\Users\Yu\Desktop\PCDS2015\Care2Reuse\samples\RPSSample\build\generated\res\rs\androidTest\debug"/><source path="C:\Users\Yu\Desktop\PCDS2015\Care2Reuse\samples\RPSSample\build\generated\res\generated\androidTest\debug"/></dataSet><mergedItems/></merger>
-=======
 <merger version="3"><dataSet config="main"><source path="C:\Users\Benjamin\PCDS2015\Care2Reuse\samples\RPSSample\src\androidTest\res"/><source path="C:\Users\Benjamin\PCDS2015\Care2Reuse\samples\RPSSample\build\generated\res\rs\androidTest\debug"/><source path="C:\Users\Benjamin\PCDS2015\Care2Reuse\samples\RPSSample\build\generated\res\generated\androidTest\debug"/></dataSet><mergedItems/></merger>
->>>>>>> ca160d62f19c93bf092b3259413f5c566719d776

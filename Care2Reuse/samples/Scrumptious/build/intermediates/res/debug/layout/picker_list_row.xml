@@ -50,8 +50,4 @@
             android:layout_height="23dip"
             android:layout_marginRight="10dip"/>
 </LinearLayout>
-<<<<<<< HEAD
-<!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/samples/Scrumptious/res/layout/picker_list_row.xml -->
-=======
 <!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/samples/Scrumptious/res/layout/picker_list_row.xml -->
->>>>>>> ca160d62f19c93bf092b3259413f5c566719d776

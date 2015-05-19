@@ -29,8 +29,4 @@
     style="@style/MessengerButtonText.White.Small"
     />
 </FrameLayout>
-<<<<<<< HEAD
-<!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/facebook/res/layout/messenger_button_send_white_small.xml --><!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/samples/RPSSample/build/intermediates/exploded-aar/com.facebook.android/facebook/4.0.0/res/layout/messenger_button_send_white_small.xml -->
-=======
 <!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/facebook/res/layout/messenger_button_send_white_small.xml --><!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/samples/RPSSample/build/intermediates/exploded-aar/com.facebook.android/facebook/4.0.0/res/layout/messenger_button_send_white_small.xml -->
->>>>>>> ca160d62f19c93bf092b3259413f5c566719d776
