@@ -6,9 +6,14 @@
     <string name="title_activity_information">Information</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_profile">Profile</string>
-    <string name="InnoAidinfo">Care2Reuse is a non-profit social network that allows everyone to improve its environmental and social footprint\n\nC2R promotes reuse as the second most desirable waste management option (after waste prevention), by connecting people that want to get of reusable things with people that want them \n\nC2R aims at leveraging the importance of reuse, building the first environment-oriented social \n\nTo know more, visit the <a href="http://www.innoaid.org/care2reuse/">Care2Reuse</a> page</string>
+    <string name="care2reusetext">Care2Reuse is a non-profit social network that allows everyone to improve its environmental and social footprint\n\nC2R promotes reuse as the second most desirable waste management option (after waste prevention), by connecting people that want to get of reusable things with people that want them \n\nC2R aims at leveraging the importance of reuse, building the first environment-oriented social \n\nTo know more, visit the <a href="http://www.innoaid.org/care2reuse/">Care2Reuse</a> page</string>
+    <string name="disclaimertext">End user license agreement</string>
+    <string name="innoaidtext">Innoaid info</string>
     <string name="facebook_app_id">687199041401045</string>
     <string name="title_activity_loginactivity">loginactivity</string>
     <string name="title_facebook_login">com.facebook.LoginActivity</string>
     <string name="title_activity_single_post">SinglePostActivity</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="innoaid">InnoAid</string>
+
 </resources>
