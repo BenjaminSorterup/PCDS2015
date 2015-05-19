@@ -1,8 +1,11 @@
 package com.example.christian.care2reuse;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -24,10 +27,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.android.volley.Response.*;
@@ -41,6 +49,8 @@ public class Post extends ActionBarActivity {
     String str_url = "https://dev.care2reuse.org/posts/?format=api";
     TextView tv;
     EditText et;
+
+    String name;
 
     Button button1;
     ImageView mImageView;
@@ -105,9 +115,38 @@ public class Post extends ActionBarActivity {
         /*
         *Takes the msg written in the textView and sends it to the server
          */
-        RequestQueue queue = Volley.newRequestQueue(this);
         String msg;
         msg = et.getText().toString();
+        JSONObject json = new JSONObject();
+        try{
+            json.put("id", null);
+            json.put("content", msg);
+            json.put("address", "SOMETHING RANDOM");
+            json.put("location", null);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, str_url, json, new Response.Listener<JSONObject>(){
+           @Override
+           public void onResponse(JSONObject response) {
+               System.out.println(response);
+               Log.e("pew?", response.toString());
+           }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError e) {
+               System.out.println(e);
+               Log.e("pew2", e.toString());
+            }
+        }) {@Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "");
+                return params;
+            }
+        };
+/*
         StringRequest stringReq = new StringRequest(Request.Method.POST, str_url,
                 new Response.Listener<String>() {
                     @Override
@@ -120,7 +159,7 @@ public class Post extends ActionBarActivity {
                 tv.setText("Error", TextView.BufferType.EDITABLE);
 
             }
-        }) {@Override
+        });/* {@Override
         protected Map<String, String> getParams () {
             Map<String, String> params = new HashMap<String, String>();
             params.put("id", "i dont even know"); //skal have facebook login username
@@ -128,15 +167,15 @@ public class Post extends ActionBarActivity {
             params.put("address", "empty for the moment"); //skal kunne få image bitmap
             params.put("location", "pew");
             return params;
-        }/*
+        }
         @Override
         public Map<String, String> getHeaders ()throws AuthFailureError {
             Map<String, String> params = new HashMap<String, String>();
             params.put("Content", "applicatiob/x-ww-form-urlencoded");
             return params;
-        }*/
-    };
-    queue.add(stringReq);
+        }
+    };*/
+    queue.add(req);
     }
 
     public void callfunc(){
@@ -170,8 +209,10 @@ public class Post extends ActionBarActivity {
 
                 //MEDIA
                 selectedImagePath = getPath(selectedImageUri);
-                if(selectedImagePath!=null)
-                    System.out.println("selectedImagePath is the right one for you!");
+                if(selectedImagePath!=null) {
+                    Bitmap myBitmap = BitmapFactory.decodeFile(selectedImagePath);
+                    mImageView.setImageBitmap(myBitmap);
+                }
                 else
                     System.out.println("filemanagerstring is the right one for you!");
             }
