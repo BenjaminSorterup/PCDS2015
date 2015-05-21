@@ -9,7 +9,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Gallery;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Button;
 import android.view.View;
@@ -46,7 +50,7 @@ import static com.android.volley.Response.*;
 public class Post extends ActionBarActivity {
     private static final int SELECT_PICTURE = 1;
     static final int CAMERA_REQUEST = 1888;
-    String str_url = "https://dev.care2reuse.org/posts/?format=api";
+    String str_url = "https://dev.care2reuse.org/posts/";
     TextView tv;
     EditText et;
 
@@ -54,15 +58,16 @@ public class Post extends ActionBarActivity {
 
     Button button1;
     ImageView mImageView;
+    HorizontalScrollView myGallery;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-
         et = (EditText) findViewById(R.id.postET);
         tv = (TextView) findViewById(R.id.tvPost);
 
         button1 = (Button) findViewById(R.id.button1);
+
         button1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,11 +78,11 @@ public class Post extends ActionBarActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         // Toast.makeText(Post.this, item.getItemId(), Toast.LENGTH_SHORT).show();
 
-                        if(item.getTitle().equals("Take picture")){
+                        if (item.getTitle().equals("Take picture")) {
                             dispatchTakePictureIntent();
 
                         }
-                        if (item.getTitle().equals("Upload picture from Library")){
+                        if (item.getTitle().equals("Upload picture from Library")) {
                             callfunc();
                         }
 
@@ -89,7 +94,6 @@ public class Post extends ActionBarActivity {
             }
         });
     }
-
 
 
     @Override
@@ -119,10 +123,10 @@ public class Post extends ActionBarActivity {
         msg = et.getText().toString();
         JSONObject json = new JSONObject();
         try{
-            json.put("id", null);
+            json.put("id", "c00369260eab0df08da7c37d96a758bb99dfe96d");
             json.put("content", msg);
             json.put("address", "SOMETHING RANDOM");
-            json.put("location", null);
+            json.put("location",null );
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -132,12 +136,14 @@ public class Post extends ActionBarActivity {
            public void onResponse(JSONObject response) {
                System.out.println(response);
                Log.e("pew?", response.toString());
+               Toast.makeText(Post.this, "Its workiing", Toast.LENGTH_SHORT).show();
            }
         }, new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError e) {
                System.out.println(e);
                Log.e("pew2", e.toString());
+                Toast.makeText(Post.this, "Error la", Toast.LENGTH_SHORT).show();
             }
         }) {@Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -198,10 +204,14 @@ public class Post extends ActionBarActivity {
      * @param data
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        myGallery = (HorizontalScrollView)findViewById(R.id.postgallery);
         mImageView = (ImageView)findViewById(R.id.postimg);
+        LinearLayout layout = (LinearLayout)findViewById(R.id.horizontal);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             mImageView.setImageBitmap(photo);
+
+            layout.addView(mImageView);
         }
         /*
         *Saves the selected photo when accessing the media library intent.
@@ -220,6 +230,7 @@ public class Post extends ActionBarActivity {
                 if(selectedImagePath!=null) {
                     Bitmap myBitmap = BitmapFactory.decodeFile(selectedImagePath);
                     mImageView.setImageBitmap(myBitmap);
+                    myGallery.addView(mImageView);
                 }
                 else
                     System.out.println("filemanagerstring is the right one for you!");
