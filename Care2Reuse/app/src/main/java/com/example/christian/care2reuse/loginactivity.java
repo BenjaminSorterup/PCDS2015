@@ -1,5 +1,6 @@
 package com.example.christian.care2reuse;
 
+import android.app.DownloadManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -14,7 +15,23 @@ import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.io.StringWriter;
 
 public class loginactivity extends FragmentActivity {
 
@@ -49,6 +66,64 @@ public class loginactivity extends FragmentActivity {
 
                         transaction.hide(fragments[LOGIN]);
                         transaction.commit();
+                        //String userid = currentAccessToken.getUserId();
+                        GraphRequest request = GraphRequest.newMeRequest(
+                                currentAccessToken,
+                                new GraphRequest.GraphJSONObjectCallback() {
+                                    @Override
+                                    public void onCompleted(
+                                            JSONObject object,
+                                            GraphResponse response) {
+                                        try {
+                                            Log.e("name",object.getString("name"));
+
+                                            //post to api
+                                            HttpClient httpClient = new DefaultHttpClient();
+
+                                            try {
+                                                HttpPost httppost = new HttpPost("your url");
+                                                // serialization of data into json
+                                                //Gson gson = new GsonBuilder().serializeNulls().create();
+                                                //String json = gson.toJson(data);
+                                                String json = object.toString();
+                                                httppost.addHeader("content-type", "application/json");
+
+                                                // creating the entity to send
+                                                ByteArrayEntity toSend = new ByteArrayEntity(json.getBytes());
+                                                httppost.setEntity(toSend);
+
+                                                HttpResponse postResponse = httpClient.execute(httppost);
+                                                String status = "" + postResponse.getStatusLine();
+                                                System.out.println(status);
+                                                HttpEntity entity = postResponse.getEntity();
+                                                /*
+                                                InputStream input = entity.getContent();
+                                                StringWriter writer = new StringWriter();
+                                                IOUtils.copy(input, writer, "UTF8");
+                                                String content = writer.toString();
+                                                // do something useful with the content
+                                                System.out.println(content);
+                                                writer.close();
+                                                EntityUtils.consume(entity);
+                                                */
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+
+                                            } finally {
+                                                httpClient.getConnectionManager().shutdown();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                            /*
+                            Bundle parameters = new Bundle();
+                            parameters.putString("fields", "id,name");
+                            request.setParameters(parameters);
+                            */
+                            request.executeAsync();
+
 
                     } else {
                         FragmentManager fm = getSupportFragmentManager();
@@ -56,6 +131,7 @@ public class loginactivity extends FragmentActivity {
 
                         transaction.show(fragments[LOGIN]);
                         transaction.commit();
+
                     }
                 }
             }
@@ -120,6 +196,8 @@ public class loginactivity extends FragmentActivity {
         if (AccessToken.getCurrentAccessToken() != null) {
             Intent intent = new Intent(loginactivity.this,MainActivity.class);
             startActivity(intent);
+            Log.e("test2","Onresume husk");
+
 
         } 
         else {
@@ -130,6 +208,7 @@ public class loginactivity extends FragmentActivity {
 
             transaction.show(fragments[0]);
             transaction.commit();
+
         }
     }
 
