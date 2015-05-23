@@ -77,10 +77,27 @@
         android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/postimg"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/postimg2"
+        android:layout_alignTop="@+id/postimg"
+        android:layout_toRightOf="@+id/postimg"
+        android:layout_toEndOf="@+id/postimg" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/postimg3"
+        android:layout_alignTop="@+id/postimg2"
+        android:layout_toRightOf="@+id/postimg2"
+        android:layout_toEndOf="@+id/postimg2" />
 
 </RelativeLayout>

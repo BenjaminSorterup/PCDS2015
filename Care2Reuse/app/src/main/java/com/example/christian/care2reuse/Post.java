@@ -49,11 +49,13 @@ public class Post extends ActionBarActivity {
     String str_url = "https://dev.care2reuse.org/posts/?format=api";
     TextView tv;
     EditText et;
-
+    int pic_it;
     String name;
 
     Button button1;
     ImageView mImageView;
+    ImageView mImageView2;
+    ImageView mImageView3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,7 +121,7 @@ public class Post extends ActionBarActivity {
         msg = et.getText().toString();
         JSONObject json = new JSONObject();
         try{
-            json.put("id", null);
+            json.put("id", 1);
             json.put("content", msg);
             json.put("address", "SOMETHING RANDOM");
             json.put("location", null);
@@ -137,6 +139,7 @@ public class Post extends ActionBarActivity {
             @Override
             public void onErrorResponse(VolleyError e) {
                System.out.println(e);
+               Log.e("pew", e.networkResponse.data.toString());
                Log.e("pew2", e.toString());
             }
         }) {@Override
@@ -198,10 +201,22 @@ public class Post extends ActionBarActivity {
      * @param data
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        pic_it = 1;
         mImageView = (ImageView)findViewById(R.id.postimg);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
-            mImageView.setImageBitmap(photo);
+            if(pic_it == 1){
+                mImageView.setImageBitmap(photo);
+                pic_it = 2;
+            }
+            if(pic_it == 2){
+                mImageView2.setImageBitmap(photo);
+                pic_it = 3;
+            }
+            if(pic_it == 3){
+                mImageView3.setImageBitmap(photo);
+                pic_it = 1;
+            }
         }
         /*
         *Saves the selected photo when accessing the media library intent.
@@ -220,6 +235,18 @@ public class Post extends ActionBarActivity {
                 if(selectedImagePath!=null) {
                     Bitmap myBitmap = BitmapFactory.decodeFile(selectedImagePath);
                     mImageView.setImageBitmap(myBitmap);
+                    if(pic_it == 1){
+                        mImageView.setImageBitmap(photo);
+                        pic_it = 2;
+                    }
+                    if(pic_it == 2){
+                        mImageView2.setImageBitmap(photo);
+                        pic_it = 3;
+                    }
+                    if(pic_it == 3){
+                        mImageView3.setImageBitmap(photo);
+                        pic_it = 1;
+                    }
                 }
                 else
                     System.out.println("filemanagerstring is the right one for you!");
