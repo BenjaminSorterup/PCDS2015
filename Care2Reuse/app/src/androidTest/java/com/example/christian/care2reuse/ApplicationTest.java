@@ -13,49 +13,47 @@ import android.widget.Button;
 import android.test.InstrumentationTestCase;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
-
+import com.robotium.solo.Solo;
 import static android.app.PendingIntent.getActivity;
 import static android.support.v4.app.ActivityCompat.startActivity;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
-public class ApplicationTest extends ActivityInstrumentationTestCase2 {
+public class ApplicationTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
+    private Solo solo;
+    private Activity mClickFunActivity;
+    private Post post_tmp;
+    public ApplicationTest() {
+        super(MainActivity.class);
 
-    private Intent mLaunchIntent = new Intent();
-    private Activity mClickFunActivity = new Activity();
-    private Button mClickMeButton;
-    private TextView mInfoTextView;
-
-    public ApplicationTest(Class activityClass) {
-        super(activityClass);
+    }
+    @Override
+    public void setUp() throws Exception {
+        solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @Override
-    protected void setUp() throws Exception{
-        super.setUp();
-
-        setActivityInitialTouchMode(true);
-
-        mClickFunActivity = getActivity();
-        mClickMeButton = (Button) mClickFunActivity.findViewById(R.id.bottomBox);
-        mInfoTextView = (TextView) mClickFunActivity.findViewById(R.id.bottomBox);
+    public void tearDown() throws Exception{
+        solo.finishOpenedActivities();
     }
 
-    @MediumTest
-    public void testClickMeButton_layout() {
-        final View decorView = mClickFunActivity.getWindow().getDecorView();
-
-        ViewAsserts.assertOnScreen(decorView, mClickMeButton);
-
-        final ViewGroup.LayoutParams layoutParams =
-                mClickMeButton.getLayoutParams();
-        assertNotNull(layoutParams);
-        assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
-        assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
+    public void testPost() throws Exception{
+       solo.assertCurrentActivity("Expected Mainactivity", "MainActivity");
+        //post button
+       ImageButton button1 = (ImageButton) solo.getView(R.id.button4);
+       solo.clickOnView(button1);
+       solo.assertCurrentActivity("Expected Post activity", "Post");
+       EditText et = (EditText) solo.getView(R.id.postET);
+       String text = "lalalala";
+       solo.enterText(et, text);
+       solo.clickOnButton("Send");
+       post_tmp = (Post)solo.getCurrentActivity();
+       String tmp_msg = post_tmp.msg;
+       assertTrue(tmp_msg == text);
     }
-
-
 }

@@ -53,7 +53,7 @@ public class Post extends ActionBarActivity {
     String str_url = "https://dev.care2reuse.org/posts/";
     TextView tv;
     EditText et;
-
+    String msg;
     String name;
 
     Button button1;
@@ -119,7 +119,6 @@ public class Post extends ActionBarActivity {
     *Takes the msg written in the textView and sends it to the server
      */
     public void createMSG(View v) {
-        String msg;
         msg = et.getText().toString();
         JSONObject json = new JSONObject();
         try{
