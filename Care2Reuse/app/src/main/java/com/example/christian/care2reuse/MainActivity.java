@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
@@ -30,7 +31,11 @@ import android.widget.TextView;
 
 public class MainActivity extends ListActivity {
 
+
     private static String url = "https://dev.care2reuse.org/posts/";
+
+    //tag for error logging
+    private static String TAG_ERR = "Error";
 
     //tags for receiving information from the JSON data
     private static final String TAG_ID = "id";
@@ -42,10 +47,19 @@ public class MainActivity extends ListActivity {
     private static final String TAG_LOC = "location";
 
     ArrayList<HashMap<String,String>> postList;
+    //list for post activity
+    ArrayList<HashMap<String,String>> tmpPost;
+
+
 
     GPSTracker mGPS = new GPSTracker(this);
     Double mLatitude;
     Double mLongitude;
+
+    ListView lv;
+
+    SimpleAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +69,11 @@ public class MainActivity extends ListActivity {
         mLatitude = mGPS.getLocation().getLatitude();
         mLongitude = mGPS.getLocation().getLongitude();
 
-
         ImageButton postButton = (ImageButton) findViewById(R.id.button4);
         postButton.bringToFront();
-        postList = new ArrayList<HashMap<String, String>>();
 
-        ListView lv = getListView();
+        postList = new ArrayList<HashMap<String, String>>();
+        lv = getListView();
 
         //Change to the Single Post view and send along needed information.
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -109,6 +122,30 @@ public class MainActivity extends ListActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onStart() {
+        onCreate(new Bundle());
+
+    }
+
+
+    /*
+     * id = "1"
+     * content = "din mor"
+     * date = "dd-mm-yyyy"
+     * distance = "0"
+     */
+    public void createPost(String id, String content, String date, String first_name, String last_name, String distance){
+        HashMap<String,String> post = new HashMap<String,String>();
+        post.put(TAG_ID, id);
+        post.put(TAG_CON, content);
+        post.put(TAG_DATE, date);
+        post.put(TAG_FNAME,first_name);
+        post.put(TAG_LNAME,last_name);
+        post.put("distance",distance.toString());
+        tmpPost.add(post);
+
+    }
     private double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
         double theta = lon1 - lon2;
         double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
@@ -168,6 +205,11 @@ public class MainActivity extends ListActivity {
             String jsonStr = jsonParser.request(url,jsonParser.GET,null);
             if (jsonStr != null) {
                 try {
+                    ArrayList<HashMap<String,String>> tmp = new ArrayList<HashMap<String, String>>();
+                    postList = tmp;
+                    if (tmpPost != null) {
+                        postList.addAll(tmpPost);
+                    }
                     JSONArray jArr = new JSONArray(jsonStr);
 
                     //Loop through objects in array and extract required information
@@ -204,14 +246,16 @@ public class MainActivity extends ListActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } return null;
+            } else {
+                Log.e(TAG_ERR,"No connection to API.");
+            }return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             //create list adapter from information gained from the JSON data
-            final SimpleAdapter adapter = new SimpleAdapter(
+            adapter = new SimpleAdapter(
                     MainActivity.this,postList,
                     R.layout.list_v, new String[]{TAG_CON,TAG_DATE,TAG_FNAME,TAG_LNAME,"latitude"},
                     new int[]{R.id.content,R.id.date,R.id.firstname,R.id.lastname,R.id.distance});
