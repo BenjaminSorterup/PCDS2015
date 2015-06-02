@@ -5,11 +5,16 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Gallery;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Button;
 import android.view.View;
@@ -22,7 +27,6 @@ import android.net.Uri;
 import android.database.Cursor;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,6 +39,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,30 +49,27 @@ import static com.android.volley.Response.*;
 /*
 *Post class represents the activity where the user is able to create posts
  */
-=======
-import org.json.JSONObject;
-
->>>>>>> dashboard
 public class Post extends ActionBarActivity {
     private static final int SELECT_PICTURE = 1;
     static final int CAMERA_REQUEST = 1888;
-    String str_url = "https://dev.care2reuse.org/posts/?format=api";
+    String str_url = "https://dev.care2reuse.org/posts/";
     TextView tv;
     EditText et;
-
+    String msg;
     String name;
 
     Button button1;
     ImageView mImageView;
+    HorizontalScrollView myGallery;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-
         et = (EditText) findViewById(R.id.postET);
         tv = (TextView) findViewById(R.id.tvPost);
 
         button1 = (Button) findViewById(R.id.button1);
+
         button1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,11 +80,11 @@ public class Post extends ActionBarActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         // Toast.makeText(Post.this, item.getItemId(), Toast.LENGTH_SHORT).show();
 
-                        if(item.getTitle().equals("Take picture")){
+                        if (item.getTitle().equals("Take picture")) {
                             dispatchTakePictureIntent();
 
                         }
-                        if (item.getTitle().equals("Upload picture from Library")){
+                        if (item.getTitle().equals("Upload picture from Library")) {
                             callfunc();
                         }
 
@@ -93,10 +95,7 @@ public class Post extends ActionBarActivity {
                 popup.show();
             }
         });
-
-
     }
-
 
 
     @Override
@@ -118,19 +117,20 @@ public class Post extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-<<<<<<< HEAD
     /*
     *Takes the msg written in the textView and sends it to the server
      */
     public void createMSG(View v) {
-        String msg;
+<<<<<<< HEAD
         msg = et.getText().toString();
         JSONObject json = new JSONObject();
-        try{
-            json.put("id", null);
+
+
+ /*       try{
+            json.put("id", "c00369260eab0df08da7c37d96a758bb99dfe96d");
             json.put("content", msg);
             json.put("address", "SOMETHING RANDOM");
-            json.put("location", null);
+            json.put("location",null );
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -140,12 +140,14 @@ public class Post extends ActionBarActivity {
            public void onResponse(JSONObject response) {
                System.out.println(response);
                Log.e("pew?", response.toString());
+               Toast.makeText(Post.this, "Its workiing", Toast.LENGTH_SHORT).show();
            }
         }, new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError e) {
                System.out.println(e);
                Log.e("pew2", e.toString());
+                Toast.makeText(Post.this, "Error la", Toast.LENGTH_SHORT).show();
             }
         }) {@Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -154,6 +156,7 @@ public class Post extends ActionBarActivity {
                 return params;
             }
         };
+        */
 /*
         StringRequest stringReq = new StringRequest(Request.Method.POST, str_url,
                 new Response.Listener<String>() {
@@ -183,33 +186,38 @@ public class Post extends ActionBarActivity {
             return params;
         }
     };*/
-    queue.add(req);
+    //queue.add(req);
+=======
+        Log.e("Error","vi klikkede");
+        Calendar c = Calendar.getInstance();
+        String year = ""+c.get(Calendar.YEAR);
+        String month = ""+(c.get(Calendar.MONTH)+1);
+        String day = ""+c.get(Calendar.DAY_OF_MONTH);
+        if(Integer.parseInt(day) < 10){
+            day = "0"+day;
+        }
+        if(Integer.parseInt(month) < 10){
+            month = "0"+month;
+        }
+
+
+
+        String distance = "0";
+        Intent in = new Intent(Post.this,MainActivity.class);
+        in.putExtra("first_name","Christian");
+        in.putExtra("last_name" ,"Stenderup");
+        in.putExtra("content",et.getText().toString());
+        in.putExtra("date",day+"/"+month+"/"+year);
+        in.putExtra("id","1");
+        in.putExtra("distance",distance);
+        startActivity(in);
+
+>>>>>>> dashboard
     }
 
  /*
 *Used to create the media library intent
  */
-=======
-    public void postToDashboard(View v) {
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("id", 1);
-            JSONObject user = new JSONObject();
-            user.put("first_name", "John");
-            user.put("last_name", "Doe 1");
-            user.put("email", "user1@test.care2reuse.net");
-            user.put("facebook_uid", "D3213123121");
-            user.put("facebook_username", null);
-            jsonObject.put("user", user);
-            jsonObject.put("content", et.getText().toString());
-            jsonObject.put("address", "Halløjgade 10");
-            jsonObject.put("date_created", "2015-05-17T15:12:15.902211Z");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
->>>>>>> dashboard
     public void callfunc(){
 
         Intent intent = new Intent();
@@ -227,10 +235,14 @@ public class Post extends ActionBarActivity {
      * @param data
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        myGallery = (HorizontalScrollView)findViewById(R.id.postgallery);
         mImageView = (ImageView)findViewById(R.id.postimg);
+        LinearLayout layout = (LinearLayout)findViewById(R.id.horizontal);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             mImageView.setImageBitmap(photo);
+
+            layout.addView(mImageView);
         }
         /*
         *Saves the selected photo when accessing the media library intent.
@@ -249,6 +261,7 @@ public class Post extends ActionBarActivity {
                 if(selectedImagePath!=null) {
                     Bitmap myBitmap = BitmapFactory.decodeFile(selectedImagePath);
                     mImageView.setImageBitmap(myBitmap);
+                    myGallery.addView(mImageView);
                 }
                 else
                     System.out.println("filemanagerstring is the right one for you!");

@@ -41,7 +41,6 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<MainActivi
     public void tearDown() throws Exception{
         solo.finishOpenedActivities();
     }
-
     public void testPost() throws Exception{
        solo.assertCurrentActivity("Expected Mainactivity", "MainActivity");
         //post button

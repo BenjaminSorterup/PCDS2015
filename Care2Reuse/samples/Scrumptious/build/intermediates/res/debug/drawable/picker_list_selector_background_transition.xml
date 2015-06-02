@@ -23,4 +23,4 @@
     <item android:drawable="@drawable/picker_list_pressed"  />
     <item android:drawable="@drawable/picker_list_longpressed"  />
 </transition>
-<!-- From: file:/C:/Users/Yu/Desktop/PCDS2015/Care2Reuse/samples/Scrumptious/res/drawable/picker_list_selector_background_transition.xml -->
+<!-- From: file:/C:/Users/Benjamin/PCDS2015/Care2Reuse/samples/Scrumptious/res/drawable/picker_list_selector_background_transition.xml -->
