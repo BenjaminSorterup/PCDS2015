@@ -121,7 +121,9 @@ public class Post extends ActionBarActivity {
     public void createMSG(View v) {
         msg = et.getText().toString();
         JSONObject json = new JSONObject();
-        try{
+
+
+ /*       try{
             json.put("id", "c00369260eab0df08da7c37d96a758bb99dfe96d");
             json.put("content", msg);
             json.put("address", "SOMETHING RANDOM");
@@ -151,6 +153,7 @@ public class Post extends ActionBarActivity {
                 return params;
             }
         };
+        */
 /*
         StringRequest stringReq = new StringRequest(Request.Method.POST, str_url,
                 new Response.Listener<String>() {
@@ -180,7 +183,7 @@ public class Post extends ActionBarActivity {
             return params;
         }
     };*/
-    queue.add(req);
+    //queue.add(req);
     }
 
  /*
