@@ -7,23 +7,17 @@ import org.json.JSONObject;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.FloatMath;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.SimpleAdapter;
@@ -51,7 +45,6 @@ public class MainActivity extends ListActivity {
     ArrayList<HashMap<String,String>> tmpPost;
 
 
-
     GPSTracker mGPS = new GPSTracker(this);
     Double mLatitude;
     Double mLongitude;
@@ -66,6 +59,14 @@ public class MainActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        Intent in = getIntent();
+        Bundle b = in.getExtras();
+
+        if (b != null) {
+            tmpPost = new ArrayList<HashMap<String, String>>();
+            createPost(b.getString("id"), b.getString("content"), b.getString("date"), b.getString("first_name"), b.getString("last_name"), b.getString("distance"));
+        }
         mLatitude = mGPS.getLocation().getLatitude();
         mLongitude = mGPS.getLocation().getLongitude();
 
@@ -142,7 +143,7 @@ public class MainActivity extends ListActivity {
         post.put(TAG_DATE, date);
         post.put(TAG_FNAME,first_name);
         post.put(TAG_LNAME,last_name);
-        post.put("distance",distance.toString());
+        post.put("distance",distance);
         tmpPost.add(post);
 
     }
@@ -207,9 +208,7 @@ public class MainActivity extends ListActivity {
                 try {
                     ArrayList<HashMap<String,String>> tmp = new ArrayList<HashMap<String, String>>();
                     postList = tmp;
-                    if (tmpPost != null) {
-                        postList.addAll(tmpPost);
-                    }
+                    Log.e("Error",""+tmpPost);
                     JSONArray jArr = new JSONArray(jsonStr);
 
                     //Loop through objects in array and extract required information
@@ -242,13 +241,16 @@ public class MainActivity extends ListActivity {
                         postList.add(post);
                     }
 
+                    if (tmpPost != null) {
+                        postList.addAll(tmpPost);
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             } else {
                 Log.e(TAG_ERR,"No connection to API.");
-            }return null;
+            } return null;
         }
 
         @Override

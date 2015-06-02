@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +35,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,67 +117,30 @@ public class Post extends ActionBarActivity {
     *Takes the msg written in the textView and sends it to the server
      */
     public void createMSG(View v) {
-        String msg;
-        msg = et.getText().toString();
-        JSONObject json = new JSONObject();
-        try{
-            json.put("id", null);
-            json.put("content", msg);
-            json.put("address", "SOMETHING RANDOM");
-            json.put("location", null);
-        }catch(JSONException e){
-            e.printStackTrace();
+        Log.e("Error","vi klikkede");
+        Calendar c = Calendar.getInstance();
+        String year = ""+c.get(Calendar.YEAR);
+        String month = ""+(c.get(Calendar.MONTH)+1);
+        String day = ""+c.get(Calendar.DAY_OF_MONTH);
+        if(Integer.parseInt(day) < 10){
+            day = "0"+day;
         }
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, str_url, json, new Response.Listener<JSONObject>(){
-           @Override
-           public void onResponse(JSONObject response) {
-               System.out.println(response);
-               Log.e("pew?", response.toString());
-           }
-        }, new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError e) {
-               System.out.println(e);
-               Log.e("pew2", e.toString());
-            }
-        }) {@Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", "Tokenc00369260eab0df08da7c37d96a758bb99dfe96d");
-                return params;
-            }
-        };
-/*
-        StringRequest stringReq = new StringRequest(Request.Method.POST, str_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        tv.setText("It's send", TextView.BufferType.EDITABLE);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                tv.setText("Error", TextView.BufferType.EDITABLE);
+        if(Integer.parseInt(month) < 10){
+            month = "0"+month;
+        }
 
-            }
-        });/* {@Override
-        protected Map<String, String> getParams () {
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("id", "i dont even know"); //skal have facebook login username
-            params.put("content", "pew?"); //pew
-            params.put("address", "empty for the moment"); //skal kunne få image bitmap
-            params.put("location", "pew");
-            return params;
-        }
-        @Override
-        public Map<String, String> getHeaders ()throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("Content", "applicatiob/x-ww-form-urlencoded");
-            return params;
-        }
-    };*/
-    queue.add(req);
+
+
+        String distance = "0";
+        Intent in = new Intent(Post.this,MainActivity.class);
+        in.putExtra("first_name","Christian");
+        in.putExtra("last_name" ,"Stenderup");
+        in.putExtra("content",et.getText().toString());
+        in.putExtra("date",day+"/"+month+"/"+year);
+        in.putExtra("id","1");
+        in.putExtra("distance",distance);
+        startActivity(in);
+
     }
 
  /*

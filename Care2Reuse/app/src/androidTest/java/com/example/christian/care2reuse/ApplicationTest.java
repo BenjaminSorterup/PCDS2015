@@ -56,6 +56,4 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2 {
         assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
         assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
     }
-
-
 }
