@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -53,12 +54,11 @@ public class Post extends ActionBarActivity {
     private static final int SELECT_PICTURE = 1;
     static final int CAMERA_REQUEST = 1888;
     String str_url = "https://dev.care2reuse.org/posts/";
-    TextView tv;
     EditText et;
     String msg;
     String name;
 
-    Button button1;
+    ImageButton button1;
     ImageView mImageView;
     HorizontalScrollView myGallery;
     @Override
@@ -66,9 +66,8 @@ public class Post extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
         et = (EditText) findViewById(R.id.postET);
-        tv = (TextView) findViewById(R.id.tvPost);
 
-        button1 = (Button) findViewById(R.id.button1);
+        button1 = (ImageButton) findViewById(R.id.button1);
 
         button1.setOnClickListener(new OnClickListener() {
             @Override
@@ -143,6 +142,7 @@ public class Post extends ActionBarActivity {
         in.putExtra("date",day+"/"+month+"/"+year);
         in.putExtra("id","1");
         in.putExtra("distance",distance);
+        et.setText("");
         startActivity(in);
 
     }

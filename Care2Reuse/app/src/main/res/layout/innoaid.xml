@@ -31,12 +31,13 @@
         android:id="@+id/bottomBox" />
 
     <TextView
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:textColor="#000000"
-        android:text="@string/innoaidtext"
+        android:text="InnoAid"
         android:id="@+id/InnoAid"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/bottomBox"
+        android:layout_below="@+id/topBox" />
 
 </RelativeLayout>
