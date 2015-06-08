@@ -26,6 +26,6 @@
             android:id="@+id/skip"
             android:layout_gravity="center_horizontal"
             android:onClick="Skip"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
     </LinearLayout>
 </ScrollView>

@@ -2,14 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#FFFFFF"
     android:fillViewport="true"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="@string/innoaid"
+        android:text="@string/disclaimer"
         android:textSize="16sp"
         android:gravity="center"
         android:textColor="#FFFFFF"
@@ -28,16 +27,21 @@
         android:layout_alignStart="@+id/topBox"
         android:layout_alignRight="@+id/topBox"
         android:layout_alignEnd="@+id/topBox"
-        android:id="@+id/bottomBox" />
+        android:id="@+id/bottomBox"
+        android:layout_weight="2.0"/>
+
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
         android:textColor="#000000"
-        android:text="InnoAid"
-        android:id="@+id/InnoAid"
+        android:text="@string/disclaimertext"
+        android:id="@+id/disclaimer"
+        android:layout_weight="1.0"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/bottomBox"
-        android:layout_below="@+id/topBox" />
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="30dp"
+        android:layout_above="@+id/bottomBox" />
 
 </RelativeLayout>

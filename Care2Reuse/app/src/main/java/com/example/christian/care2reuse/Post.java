@@ -167,14 +167,10 @@ public class Post extends ActionBarActivity {
      * @param data
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        myGallery = (HorizontalScrollView)findViewById(R.id.postgallery);
         mImageView = (ImageView)findViewById(R.id.postimg);
-        LinearLayout layout = (LinearLayout)findViewById(R.id.horizontal);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             mImageView.setImageBitmap(photo);
-
-            layout.addView(mImageView);
         }
         /*
         *Saves the selected photo when accessing the media library intent.
