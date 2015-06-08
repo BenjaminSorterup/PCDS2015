@@ -57,9 +57,11 @@ public class Post extends ActionBarActivity {
     EditText et;
     String msg;
     String name;
-
+    int imgview = 1;
     ImageButton button1;
     ImageView mImageView;
+    ImageView mImageView2;
+    ImageView mImageView3;
     HorizontalScrollView myGallery;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,12 +135,12 @@ public class Post extends ActionBarActivity {
         }
 
 
-
+        msg = et.getText().toString();
         String distance = "0";
         Intent in = new Intent(Post.this,MainActivity.class);
         in.putExtra("first_name","Christian");
         in.putExtra("last_name" ,"Stenderup");
-        in.putExtra("content",et.getText().toString());
+        in.putExtra("content",msg);
         in.putExtra("date",day+"/"+month+"/"+year);
         in.putExtra("id","1");
         in.putExtra("distance",distance);
@@ -168,9 +170,23 @@ public class Post extends ActionBarActivity {
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         mImageView = (ImageView)findViewById(R.id.postimg);
+        mImageView2 = (ImageView)findViewById(R.id.postimg2);
+        mImageView3 = (ImageView)findViewById(R.id.postimg3);
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
-            mImageView.setImageBitmap(photo);
+            if(imgview == 1){
+            mImageView.setImageBitmap(Bitmap.createScaledBitmap(photo, 60, 60, false));
+             imgview = 2;
+        }
+            else if(imgview == 2){
+                mImageView2.setImageBitmap(Bitmap.createScaledBitmap(photo, 60, 60, false));
+                imgview = 3;
+            }
+            else if(imgview == 3){
+                mImageView3.setImageBitmap(Bitmap.createScaledBitmap(photo, 60, 60, false));
+                imgview = 1;
+            }
+
         }
         /*
         *Saves the selected photo when accessing the media library intent.
@@ -187,9 +203,22 @@ public class Post extends ActionBarActivity {
                 //MEDIA
                 selectedImagePath = getPath(selectedImageUri);
                 if(selectedImagePath!=null) {
-                    Bitmap myBitmap = BitmapFactory.decodeFile(selectedImagePath);
-                    mImageView.setImageBitmap(myBitmap);
-                    myGallery.addView(mImageView);
+                    if(imgview == 3) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(selectedImagePath);
+                        mImageView3.setImageBitmap(Bitmap.createScaledBitmap(myBitmap, 60, 60, false));
+                        imgview = 1;
+                    }
+                    else if(imgview == 2) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(selectedImagePath);
+                        mImageView2.setImageBitmap(Bitmap.createScaledBitmap(myBitmap, 60, 60, false));
+                        imgview = 3;
+                    }
+                    else if(imgview == 1) {
+                        Bitmap myBitmap = BitmapFactory.decodeFile(selectedImagePath);
+                        mImageView.setImageBitmap(Bitmap.createScaledBitmap(myBitmap, 60, 60, false));
+                        imgview = 2;
+                    }
+
                 }
                 else
                     System.out.println("filemanagerstring is the right one for you!");
