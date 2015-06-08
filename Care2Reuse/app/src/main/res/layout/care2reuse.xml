@@ -36,8 +36,9 @@
         android:textColor="#000000"
         android:text="@string/care2reusetext"
         android:id="@+id/InnoAid"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/bottomBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="33dp" />
 
     <ImageView
         android:layout_width="70dp"
@@ -45,6 +46,7 @@
         android:id="@+id/imageView2"
         android:src="@mipmap/postbutton"
         android:layout_above="@+id/InnoAid"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp" />
 
 </RelativeLayout>
