@@ -1,0 +1,121 @@
+Dear User
+
+In order for you the access or share content via Care2Reuse it's a requirement that you agree to below license. In broad terms the license says that any information, images, text, geographical location. etc. entered into the App can be shared by Care2Reuse without your explicit agreement. Please read and accept this is order to use the app
+
+1. INTRODUCTION
+
+1.1 This End User License Agreement (or "EULA") is a contract between you and Care2Reuse IVS. This EULA applies to the apps "Care2Reuse" & "Freeng", the software in it including any patches or updates, and any User Generated Content (which we explain in section 6) (we'll refer to them together as the "App"). 
+
+1.2 If you are under 18 years of age, please ask your parent or guardian to review and approve this EULA on your behalf (because in some countries people under the age of 18 cannot enforceably enter into contracts like this EULA on their own).
+
+1.3 You confirm your agreement to this EULA by accepting it as part of the installation process of the App or using the App. If you do not agree this EULA, please do not install the App.
+
+1.4 If you think that this EULA is not complete in any respect, please contact us as soon as possible. If you do not do so within a reasonable period after you have installed the App or started to play the App, then you shall be considered to have agreed to the terms of this EULA.
+
+2. ABOUT US
+
+2.1 We are Care2Reuse IVS, a company incorporated Denmark 
+
+3. USING THE APP
+
+3.1 In return for your acceptance of the terms of this EULA, we give you the personal right (known as a 'license') to download and use the App on (i) any mobile or tablet device that you own or control and as permitted by the Usage Rules set forth in the Apple App Store & Google Play terms & conditions.
+
+3.2 This license is for your personal use only (i.e. not for other people and not for commercial gain). We can terminate this license in certain circumstances, which are explained further below. This license is 'non-exclusive', meaning that we can grant similar licenses to other people as well. It is also 'non-transferable', meaning it cannot be given to anyone else.
+
+4. PATCHES, UPDATES AND CHANGES
+
+4.1 From time to time, we may need to deploy or provide patches, updates, additional content or other modifications to the App (for example to enhance user experience, to add new features or to resolve software bugs). From time to time, we may also at our discretion remove or suspend access to particular features, content or other parts of the App.
+
+5. INTELLECTUAL PROPERTY
+
+5.1 The App, including the graphics, user interface, audio and other content, contains proprietary information and material that is protected by copyright and other laws including but not limited to intellectual property. You agree that we own or license all of this proprietary information and material and that you may not use or exploit any of it without our permission. This does not cover the User Generated Content, which is addressed below.
+
+6. USER GENERATED CONTENT
+
+6.1 As part of the App you can create your own posts and upload associated images to our servers for other users to view ("User Generated Content" or "UGC"). Any User Generated Content you create is your property and you represent and warrant that:
+
+(a) it is your own items posted (i.e. you have not stolen or otherwise illegally obtained them it);
+
+(b) you have not made the UGC to be deliberately offensive and the UGC is not defamatory and does not infringe any applicable laws;
+
+(c) the content is to be shared, so you grant Care2Reuse IVS an irrevocable, worldwide, non-exclusive, royalty-free license to use, reproduce, distribute, modify, adapt, publish, translate, prepare derivative works of and display the UGC and you waive any and all moral or similar rights you may have over the UGC;
+
+(d) you accept that there is no guarantee that the UGC will be stored by us or made available for download/use by other players and that it may be removed at any point for any reason by us; and
+
+You will indemnify and hold harmless Care2Reuse IVS for all damages, costs and expenses incurred for breaching theses warranties.
+
+7. PRIVACY POLICY
+
+7.1 Care2Reuse IVS shares any information entered into the App with all other users.
+
+7.2. By entering into this agreement you confirm that you agree that the content (including your e-mail, your profile info from the connected social networks, geographical location when posting, uploaded images and text and other content) is shared in this why with no control on your part
+
+8. WHAT YOU MUST NOT DO
+
+8.1 You must not do or attempt to do (either yourself or via someone else) any of the following:
+
+(a) to use the App for any purpose except sharing or searching items for free (e.g. commercial gain);
+
+(b) except as authorized by us in this EULA (or as permitted by law) to copy, rent, sub-license, loan, modify, adapt, merge, translate, reverse engineer, decompile, disassemble the software included in the App or create adaptations of the App or derivative works based on the App (excluding User Generated Content); or
+
+(c) to hack, distribute, modify, transmit, harm, or misuse the App.
+
+9. WARRANTIES AND LIMITATION OF LIABILITY REGARDING THE APP
+
+Warranties
+
+9.1 We warrant that: (i) we have the right to enter this EULA and to grant you the license to use the App set out in section 3; (ii) we will use reasonable skill and care to give you access to the App; and (iii) we will use reasonable endeavors to comply with applicable laws in the performance of our obligations under this EULA.
+
+Limitation of liability
+
+9.2 Please also note that:
+
+(a) we provide the App for personal entertainment, on an 'as is' basis. This means that we make no warranties about the features, content or other parts of the App;
+
+(b) we make no warranties that the App is of satisfactory quality or fit for purpose; 
+
+(c) we make no warranties regarding the App's operation or that it will be error free; and 
+
+(d) we decline any responsibility for direct or indirect damages deriving in whole or in part from the use of said information or other correlated content posted by users of the app.
+
+10. TERMINATION
+
+10.1 If you breach a term of this EULA, then we may cancel or suspend your access to the App.
+
+10.2 Care2Reuse IVS reserves the right to terminate the services provided by the App at any time 
+
+11. GENERAL
+
+11.1 This EULA governs our relationship with you. It does not create any rights for any other person, unless otherwise expressly stated in this Agreement.
+
+12. ADDITIONAL PROVISIONS APPLYING ONLY TO APPLE iOS COPIES OF THE APP
+
+Third party intellectual property right claims
+
+12.1 In the event of any third party claim that the App or your possession and use of that App infringes that third party's intellectual property rights, we and not Apple will be solely responsible for the investigation, defense, settlement and discharge of any such intellectual property infringement claim.
+
+12.2 You represent and warrant that (i) you are not located in a country that is subject to a U.S. Government embargo, or that has been designated by the U.S. Government as a "terrorist supporting" country; and (ii) you are not listed on any U.S. Government list of prohibited or restricted parties.
+
+Liability
+
+12.3 The terms set out in section 8 above do not limit any consumer rights which we cannot exclude under applicable law, nor do they exclude or limit our liability for death or personal injury resulting from our negligence or for any fraudulent representation. In the event that the App fails to comply with the warranties set out above or any other applicable warranty (whether express or implied by law), we will be solely liable to you to the extent that warranty has not been validly excluded.
+
+12.4 In the event of any failure of the App to conform to any applicable warranty you may notify Apple, and Apple will refund the purchase price for the App to that player. Otherwise, to the maximum extent permitted by applicable law, Apple will have no other warranty obligation whatsoever with respect to the App, and any other claims, losses, liabilities, damages, costs or expenses attributable to any failure to conform to any warranty will be our sole responsibility.
+
+12.5 You and we agree acknowledge that we, not Apple, are responsible for addressing any claims by you or any third party relating to the App or your possession and/or use of that App, including, but not limited to: (i) product liability claims; (ii) any claim that the App fails to conform to any applicable legal or regulatory requirement; and (iii) claims arising under consumer protection or similar legislation. This EULA may not limit our liability to you beyond what is permitted by applicable law.
+
+Apple is not a party to this EULA
+
+12.6 You and we agree that this EULA is an agreement concluded between us alone and not by Apple. We are solely responsible to you for the App and its content, so if you require maintenance or support services or have any questions or complaints please contact us and not Apple, since Apple has no obligation whatsoever to furnish any such services with respect to the App.
+
+Apple is a third party beneficiary of this EULA
+
+12.7 Apple and its subsidiaries are a third party beneficiary of this EULA. Following your acceptance of this EULA, Apple will have the right (and will be deemed to have accepted the right) to enforce the EULA against you as a third party beneficiary thereof.
+
+13. GOVERNING LAW
+
+13.1 You and we agree that your use of the App, and this EULA, shall be governed by and interpreted according to the laws of Denmark and that any dispute regarding this EULA shall be heard exclusively by the courts of Denmark.
+
+14. CHANGES TO THIS EULA
+
+14.1 We may vary this EULA as and when we consider it appropriate or necessary for legal reasons or to reflect changes in the App. If so, then we will make the revised EULA available.

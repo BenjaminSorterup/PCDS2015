@@ -26,8 +26,8 @@ public class loginFragment extends Fragment {
     private CallbackManager callbackManager;
     private LoginButton loginButton;
     private Button skipButton;
-    @Override
 
+    @Override
     public View onCreateView(
             LayoutInflater inflater,
             ViewGroup container,

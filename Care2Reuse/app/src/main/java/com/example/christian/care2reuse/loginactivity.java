@@ -1,6 +1,6 @@
 package com.example.christian.care2reuse;
 
-import android.app.DownloadManager;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.content.Intent;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -17,7 +16,6 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
 
 import org.apache.http.HttpEntity;
@@ -26,12 +24,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.io.StringWriter;
 
 public class loginactivity extends FragmentActivity {
 
@@ -67,6 +62,7 @@ public class loginactivity extends FragmentActivity {
                         transaction.hide(fragments[LOGIN]);
                         transaction.commit();
                         //String userid = currentAccessToken.getUserId();
+                        /*
                         GraphRequest request = GraphRequest.newMeRequest(
                                 currentAccessToken,
                                 new GraphRequest.GraphJSONObjectCallback() {
@@ -75,7 +71,7 @@ public class loginactivity extends FragmentActivity {
                                             JSONObject object,
                                             GraphResponse response) {
                                         try {
-                                            Log.e("name",object.getString("name"));
+                                            Log.e("Test",object.getString("name"));
 
                                             //post to api
                                             HttpClient httpClient = new DefaultHttpClient();
@@ -96,17 +92,18 @@ public class loginactivity extends FragmentActivity {
                                                 String status = "" + postResponse.getStatusLine();
                                                 System.out.println(status);
                                                 HttpEntity entity = postResponse.getEntity();
-                                                /*
-                                                InputStream input = entity.getContent();
-                                                StringWriter writer = new StringWriter();
-                                                IOUtils.copy(input, writer, "UTF8");
-                                                String content = writer.toString();
+
+                                                //InputStream input = entity.getContent();
+                                                //StringWriter writer = new StringWriter();
+                                                //IOUtils.copy(input, writer, "UTF8");
+                                                //String content = writer.toString();
                                                 // do something useful with the content
-                                                System.out.println(content);
-                                                writer.close();
-                                                EntityUtils.consume(entity);
-                                                */
+                                                //System.out.println(content);
+                                                //writer.close();
+                                                //EntityUtils.consume(entity);
+
                                             } catch (Exception e) {
+
                                                 e.printStackTrace();
 
                                             } finally {
@@ -117,13 +114,13 @@ public class loginactivity extends FragmentActivity {
                                         }
                                     }
                                 });
-                            /*
-                            Bundle parameters = new Bundle();
-                            parameters.putString("fields", "id,name");
-                            request.setParameters(parameters);
-                            */
-                            request.executeAsync();
 
+                            //Bundle parameters = new Bundle();
+                            //parameters.putString("fields", "id,name");
+                            //request.setParameters(parameters);
+
+                            request.executeAsync();
+                        */
 
                     } else {
                         FragmentManager fm = getSupportFragmentManager();
