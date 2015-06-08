@@ -53,12 +53,32 @@ public class MainActivity extends ListActivity {
 
     SimpleAdapter adapter;
 
+    EditText search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        search = (EditText)findViewById(R.id.search);
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                Log.e("Error","Adapter: "+adapter.getCount());
+                Log.e("Error","charSeq " + charSequence);
+                adapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         Intent in = getIntent();
         Bundle b = in.getExtras();
@@ -67,6 +87,7 @@ public class MainActivity extends ListActivity {
             tmpPost = new ArrayList<HashMap<String, String>>();
             createPost(b.getString("id"), b.getString("content"), b.getString("date"), b.getString("first_name"), b.getString("last_name"), b.getString("distance"));
         }
+
         mLatitude = mGPS.getLocation().getLatitude();
         mLongitude = mGPS.getLocation().getLongitude();
 
@@ -257,12 +278,12 @@ public class MainActivity extends ListActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             //create list adapter from information gained from the JSON data
+            Log.e("Error","PostList: "+postList);
             adapter = new SimpleAdapter(
                     MainActivity.this,postList,
                     R.layout.list_v, new String[]{TAG_CON,TAG_DATE,TAG_FNAME,TAG_LNAME,"latitude"},
                     new int[]{R.id.content,R.id.date,R.id.firstname,R.id.lastname,R.id.distance});
             setListAdapter(adapter);
-            EditText search = (EditText)findViewById(R.id.search);
             SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
@@ -272,27 +293,11 @@ public class MainActivity extends ListActivity {
 
                 @Override
                 public void onStartTrackingTouch(SeekBar seekBar) {
-                    Log.e("DISTANCE","touched the seekbar");
+                    Log.e("DISTANCE", "touched the seekbar");
                 }
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
-
-                }
-            });
-            search.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                    adapter.getFilter().filter(charSequence);
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
 
                 }
             });

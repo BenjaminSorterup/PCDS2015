@@ -138,8 +138,8 @@ public class Post extends ActionBarActivity {
         msg = et.getText().toString();
         String distance = "0";
         Intent in = new Intent(Post.this,MainActivity.class);
-        in.putExtra("first_name","Christian");
-        in.putExtra("last_name" ,"Stenderup");
+        in.putExtra("first_name","John");
+        in.putExtra("last_name" ,"Doe");
         in.putExtra("content",msg);
         in.putExtra("date",day+"/"+month+"/"+year);
         in.putExtra("id","1");
