@@ -2,6 +2,7 @@ package com.example.christian.care2reuse;
 
 import android.app.Application;
 import android.app.Instrumentation;
+import android.app.LauncherActivity;
 import android.content.Intent;
 import android.test.ApplicationTestCase;
 import android.test.ViewAsserts;
@@ -15,6 +16,7 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.robotium.solo.Solo;
 import static android.app.PendingIntent.getActivity;
@@ -50,9 +52,22 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<MainActivi
        EditText et = (EditText) solo.getView(R.id.postET);
        String text = "lalalala";
        solo.enterText(et, text);
-       solo.clickOnButton("Send");
-       post_tmp = (Post)solo.getCurrentActivity();
-       String tmp_msg = post_tmp.msg;
-       assertTrue(tmp_msg == text);
+       ImageButton button2 = (ImageButton) solo.getView(R.id.button3);
+       solo.clickOnView(button2);
+       solo.assertCurrentActivity("Expected Mainactivity","MainActivity");
+    }
+
+    public void testInfoPage() throws Exception{
+        solo.assertCurrentActivity("Expected Mainactivity","MainActivity");
+        ImageButton button =(ImageButton) solo.getView(R.id.imageButton);
+        solo.clickOnView(button);
+        solo.assertCurrentActivity("Expected Informaton Activity","Information");
+    }
+
+    public void testProfilePage() throws Exception{
+        solo.assertCurrentActivity("Expected Mainactivity", "MainActivity");
+        ImageButton button = (ImageButton) solo.getView(R.id.button3);
+        solo.clickOnView(button);
+        solo.assertCurrentActivity("Expected ProfilePage","Profile");
     }
 }
