@@ -35,8 +35,10 @@ public class loginFragment extends Fragment {
             Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.login, container, false);
+        //creates callback manager to handle callbacks from the Facebook API
         callbackManager = CallbackManager.Factory.create();
 
+        //initializes the skip login button
         skipButton = (Button)view.findViewById(R.id.skip);
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +46,10 @@ public class loginFragment extends Fragment {
                 Skip(view);
             }
         });
+        
+        //Initializes the login button
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
+        //Sets the permissions to the data the application should have access to on the Facebook API
         loginButton.setReadPermissions("user_friends");
 
         loginButton.setFragment(this);
@@ -53,28 +58,41 @@ public class loginFragment extends Fragment {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                //Shown if the login was succesful
                 Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancel() {
+                //Shown if the login was canceled
                 Toast.makeText(getActivity(), "Login canceled", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(FacebookException exception) {
+                //Shown if there were an error on login
                 Toast.makeText(getActivity(), "Login error", Toast.LENGTH_SHORT).show();
             }
         });
         return view;
     }
 
+
+    /**
+     * onActivityResult() handles the result of the login. 
+     * 
+    */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * Skip() is called when the skip button is pressed. It changes the activity to the mainpage.
+     * @param view takes the current view
+     * 
+    */
     public void Skip(View view)
     {
         Intent intent = new Intent(getActivity(),MainActivity.class);
