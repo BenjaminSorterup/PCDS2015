@@ -11,12 +11,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * disclaimer class is a fragment shows the disclaimer information
+ * disclaimer class is a fragment that shows the disclaimer information
  */
 public class disclaimer extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.disclaimer, container, false);
+        //makes the discalimer text scrollable
         TextView scrollview = (TextView) v.findViewById(R.id.disclaimer);
         scrollview.setMovementMethod(new ScrollingMovementMethod());
 
