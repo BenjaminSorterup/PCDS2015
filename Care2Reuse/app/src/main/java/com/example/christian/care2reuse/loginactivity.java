@@ -33,6 +33,7 @@ public class loginactivity extends FragmentActivity {
     private static final int LOGIN = 0;
     private static final int FRAGMENT_COUNT = LOGIN +1;
 
+    //Initializes a list of fragments, to contain the login fragment
     private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
     private boolean isResumed = false;
     private AccessTokenTracker accessTokenTracker;
@@ -41,26 +42,42 @@ public class loginactivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Initializes the Facebook sdk
         FacebookSdk.sdkInitialize(this.getApplicationContext());
+        //Initializes an instance of the callbackmanager
         callbackManager = CallbackManager.Factory.create();
 
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken,
                                                        AccessToken currentAccessToken) {
+                //if application is resumed from previous run
                 if (isResumed) {
+                    //Initialize fragment manager
                     FragmentManager manager = getSupportFragmentManager();
                     int backStackSize = manager.getBackStackEntryCount();
                     for (int i = 0; i < backStackSize; i++) {
+                        //pop the last fragment transition from the manager's fragment stack
                         manager.popBackStack();
                     }
 
+                    //if the users login token is not equal to null
                     if (currentAccessToken != null) {
+                        //get fragment manager
                         FragmentManager fm = getSupportFragmentManager();
+                        //make transaction with login fragment
                         FragmentTransaction transaction = fm.beginTransaction();
 
                         transaction.hide(fragments[LOGIN]);
                         transaction.commit();
+                        
+                        /**
+                         * Code for getting user data from the Facebook API, which is to be used to create the user in the
+                         * PO's API, if the user doesn't already exist.
+                         * 
+                         * NOT FINISHED
+                         * 
+                        */
                         //String userid = currentAccessToken.getUserId();
                         /*
                         GraphRequest request = GraphRequest.newMeRequest(
@@ -121,9 +138,10 @@ public class loginactivity extends FragmentActivity {
 
                             request.executeAsync();
                         */
-
+                    //If there the login token = null
                     } else {
                         FragmentManager fm = getSupportFragmentManager();
+                        //begin transaction with login fragment
                         FragmentTransaction transaction = fm.beginTransaction();
 
                         transaction.show(fragments[LOGIN]);
@@ -142,6 +160,7 @@ public class loginactivity extends FragmentActivity {
         fragments[LOGIN] = loginFragment;
 
         FragmentTransaction transaction = fm.beginTransaction();
+        //hide the login fragment
         transaction.hide(fragments[0]);
         transaction.commit();
 
@@ -186,19 +205,21 @@ public class loginactivity extends FragmentActivity {
         super.onSaveInstanceState(outState);
     }
 
+
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
-
+        //if the login is remebered
         if (AccessToken.getCurrentAccessToken() != null) {
             Intent intent = new Intent(loginactivity.this,MainActivity.class);
+            //changes the activity to the main activity
             startActivity(intent);
             Log.e("test2","Onresume husk");
 
 
         }
         else {
-            // otherwise present the splash screen and ask the user to login,
+            // otherwise present the login screen and ask the user to login,
             // unless the user explicitly skipped.
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction transaction = fm.beginTransaction();
